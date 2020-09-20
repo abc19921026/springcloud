@@ -1,0 +1,25 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: springcloud-zuul #微服务名称
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance: #实例的id
+    instance-id: zuul9527.com
+    prefer-ip-address: true # 显示ip
+
+info:
+  app.name: ben.springcloud #项目名称
+  company.name: com.ben #公司名称
+
+zuul:
+  routes:
+    myUser.serviceId: springcloud-provider
+    myUser.path: /myuser/**
+    ignored-services: "*"  # 不能再使用某个(*：全部)路径访问了，ignored ： 忽略,隐藏全部的~
+    prefix: /ben # 设置公共的前缀,实现隐藏原有路由
